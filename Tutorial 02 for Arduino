@@ -1,0 +1,28 @@
+//How to Set Up the DHT11 Humidity Sensor on an Arduino
+#include"DHT.h"
+const int DHTPIN = 12;       //Đọc dữ liệu từ DHT11 ở chân 2 trên mạch Arduino
+const int DHTTYPE = DHT11;  //Khai báo loại cảm biến, có 2 loại là DHT11
+ 
+DHT dht(DHTPIN, DHTTYPE);
+
+void setup() {
+  // put your setup code here, to run once:
+  Serial.begin(9600);
+  dht.begin();         // Khởi động cảm biến
+}
+
+void loop() {
+  // put your main code here, to run repeatedly:
+  float h = dht.readHumidity();    //Đọc độ ẩm
+  float t = dht.readTemperature(); //Đọc nhiệt độ
+ 
+  Serial.print("Nhiet do: ");
+  Serial.println(t);               //Xuất nhiệt độ
+  Serial.print("Do am: ");
+  Serial.println(h);               //Xuất độ ẩm
+  
+  Serial.println();                //Xuống hàng
+  delay(1000);                     //Đợi 1 giây
+
+}
+//upload chương trình lên mạch Arduino bấm Ctrl + Shift + M để mở cửa sổ Serial Monitor và xem kết quả,
